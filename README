@@ -1,6 +1,9 @@
 How to install:
-Place the image-gallery folder at your web server document root, access via (just an example):
-http://localhost/image-gallery/uploader.html
+1. Place the image-gallery folder at your web server document root;
+
+2. Folder "temp" must have 777 permissoin. This is where all the uploaded images will reside.
+
+3. access via (just an example): http://localhost/image-gallery/uploader.html
 
 How it looks like:
 This image gallery uploader demo is composed by 2 parts: the multi-file uploader at left and an viewer at right. 
