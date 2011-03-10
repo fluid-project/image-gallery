@@ -18,7 +18,23 @@
 
 #demo-notes {
     margin-left: 1em;
-	clear: left;
-	width: 40%;
-	font-size: medium;
+    clear: left;
+    width: 40%;
+    font-size: medium;
+}
+
+#server-error {
+    margin-left: 1em;
+    margin-bottom: 1em;
+    clear: left;
+    width: 40%;
+    font-size: medium;
+    font-weight: bold;
+    color: #FF0000;
+}
+
+.image-frame {
+    float: left;
+    margin: 0.5em;
+    height: 150px;
 }

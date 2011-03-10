@@ -4,34 +4,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Uploader</title>
 
-        <link rel="stylesheet" type="text/css" href="../infusion/src/webapp/framework/fss/css/fss-reset.css" />
-        <link rel="stylesheet" type="text/css" href="../infusion/src/webapp/framework/fss/css/fss-layout.css" />
-        <link rel="stylesheet" type="text/css" href="../infusion/src/webapp/components/uploader/css/Uploader.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion-mlam/src/webapp/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion-mlam/src/webapp/framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion-mlam/src/webapp/components/uploader/css/Uploader.css" />
         
         <!-- Fluid and jQuery Dependencies -->
-        <script type="text/javascript" src="../infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/lib/jquery/ui/js/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/jquery.keyboard-a11y.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/lib/jquery/plugins/scrollTo/js/jquery.scrollTo.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/lib/swfobject/js/swfobject.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/lib/swfupload/js/swfupload.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/lib/jquery/ui/js/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/framework/core/js/jquery.keyboard-a11y.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/lib/jquery/plugins/scrollTo/js/jquery.scrollTo.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/lib/swfobject/js/swfobject.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/lib/swfupload/js/swfupload.js"></script>
 
-        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/Fluid.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/DataBinding.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidIoC.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidDocument.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidView.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/framework/enhancement/js/ProgressiveEnhancement.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/framework/core/js/DataBinding.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/framework/core/js/FluidIoC.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/framework/core/js/FluidDocument.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/framework/core/js/FluidView.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/framework/enhancement/js/ProgressiveEnhancement.js"></script>
         
         <!-- Uploader dependencies -->
-        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/Uploader.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/FileQueue.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/components/progress/js/Progress.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/FileQueueView.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/FlashUploaderSupport.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/Flash9UploaderSupport.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/HTML5UploaderSupport.js"></script>
-        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/DemoUploadManager.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/components/uploader/js/Uploader.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/components/uploader/js/FileQueue.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/components/progress/js/Progress.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/components/uploader/js/FileQueueView.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/components/uploader/js/FlashUploaderSupport.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/components/uploader/js/Flash9UploaderSupport.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/components/uploader/js/HTML5UploaderSupport.js"></script>
+        <script type="text/javascript" src="../infusion-mlam/src/webapp/components/uploader/js/DemoUploadManager.js"></script>
 
         <!-- The Uploader demo -->
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
@@ -49,10 +49,14 @@
             <h2>Uploaded images:</h2>
             <div id="image-space"></div>
         </div>
-            
+        
+        <div id="server-error">
+            <!-- The returned server error message will be displayed in this container. -->
+        </div>
+        
         <div id="demo-notes">
-            1. Your current session is valid for an hour. All uploaded images will be deleted from the server once the session is time out.<br />
-            2. Allowed uploaded file extension (case insensitive): jpg, png, gif, tif 
+            1. Your session will stay active for an hour. After one hour, all the uploaded images will be erased from the server.<br />
+            2. Allowed uploaded file types (case insensitive): jpg, png, gif, tif 
         </div>
         
         <script type="text/javascript">

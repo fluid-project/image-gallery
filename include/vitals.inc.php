@@ -3,29 +3,32 @@ if (!defined('FLUID_IG_INCLUDE_PATH')) { exit; }
 
 define('FLUID_IG_DEVEL', 1);
 
-/* get the base url	*/
+// get the protocol
 if (isset($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on')) {
 	$server_protocol = 'https://';
 } else {
 	$server_protocol = 'http://';
 }
 
+// Calculate the base href
 $dir_deep	 = substr_count(FLUID_IG_INCLUDE_PATH, '..');
 $url_parts	 = explode('/', $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
 $_base_href	 = array_slice($url_parts, 0, count($url_parts) - $dir_deep-1);
 $_base_href	 = $server_protocol . implode('/', $_base_href).'/';
 
-//if (($temp = strpos($_base_href, AT_PRETTY_URL_HANDLER)) > 0){
-//	$endpos = $temp;
-//} else {
-	$endpos = strlen($_base_href); 
+$endpos = strlen($_base_href); 
 
-//}
 $_base_href	 = substr($_base_href, 0, $endpos);
 $_base_path  = substr($_base_href, strlen($server_protocol . $_SERVER['HTTP_HOST']));
 
 define('FLUID_IG_BASE_HREF', $_base_href);
 
+/**
+ * Get the list of all the sub-directories in the given directory
+ * @access public
+ * @param  string $directory       the directory to search in
+ * @return an array of all the sub-directories
+ */
 function getAllDirs($directory) {
 	$result = array();
 	$handle =  opendir($directory);
@@ -44,13 +47,13 @@ function getAllDirs($directory) {
 }
 
 /**
-* Enables deletion of directory if not empty
+* Enables the deletion of a directory even if it is not empty
 * @access  public
-* @param   string $dir		the directory to delete
+* @param   string $directory		the directory to delete
 * @return  boolean			whether the deletion was successful
 */
-function remove_dir($dir) {
-	if(!$opendir = @opendir($dir)) {
+function remove_dir($directory) {
+	if(!$opendir = @opendir($directory)) {
 		return false;
 	}
 	
@@ -60,13 +63,13 @@ function remove_dir($dir) {
 
 			clearstatcache(); /* especially needed for Windows machines: */
 
-			if (is_file($dir.'/'.$readdir)) {
-				if(!@unlink($dir.'/'.$readdir)) {
+			if (is_file($directory.'/'.$readdir)) {
+				if(!@unlink($directory.'/'.$readdir)) {
 					return false;
 				}
-			} else if (is_dir($dir.'/'.$readdir)) {
+			} else if (is_dir($directory.'/'.$readdir)) {
 				/* calls itself to clear subdirectories */
-				if(!remove_dir($dir.'/'.$readdir)) {
+				if(!remove_dir($directory.'/'.$readdir)) {
 					return false;
 				}
 			}
@@ -75,48 +78,51 @@ function remove_dir($dir) {
 
 	@closedir($opendir);
 	
-	if(!@rmdir($dir)) {
+	if(!@rmdir($directory)) {
 		return false;
 	}
 	return true;
 }
 
 /**
- * Scan through the given $folder, remove the sub-folders that are older than the given seconds.
- * @param $folder - string, the path to the folder
- *        $secs_to_alive  integer, seconds to keep the subfolder alive
+ * Scan through the given $directory, remove the sub-folders that are older than the given seconds.
+ * @access public
+ * @param  string $directory         the path to the folder
+ *         integer $secs_to_live     the seconds that the folder should not be deleted since its creation 
+ * @return boolean          
  */
-function clean_history($folder, $secs_to_alive) {
-	$check_point = strtotime("-".$secs_to_alive." seconds"); 
+function clean_history($directory, $secs_to_live) {
+	$check_point = strtotime("-".$secs_to_live." seconds"); 
 
-	$allDirs = getAllDirs($folder);
+	$allDirs = getAllDirs($directory);
     
 	$highestKnown = 0;
-	foreach ($allDirs as $dir) {
-		$currentValue = filectime($dir);
-		$currentMValue = filemtime($dir);
+	foreach ($allDirs as $one_dir) {
+		$currentValue = filectime($one_dir);
+		$currentMValue = filemtime($one_dir);
 
 		if ($currentMValue > $currentValue) {
 			$currentValue = $currentMValue;
 		}
           
 		if ($currentValue < $check_point) {
-			remove_dir($dir);
+			remove_dir($one_dir);
 		}
      }
      return true;
 }
 
 /**
- * Ensure the uniqueness of the file name ($file_name) in folder ($folder).
- * If the file with the same name already exists in the folder, attach suffix "-N" to the name.
+ * Ensure the uniqueness of the file name, $file_name, in the directory $directory.
+ * If the file with the same name already exists in the directory, attach suffix "-N" to the name. 
+ * N is a incremented number calculated base on the existing file names.
  * For instance, if "1.jpg" already exists, return "1-1.jpg"; if "1-1.jpg" already exists, return "1-2.jpg"
- * @param $file_name: the file name to check
- *        $folder: the folder that the file resides
- * @return a unique file name
+ * @param string $file_name      the file name to check
+ *        string $directory      the folder that the file resides
+ * @return string, a unique file name
  */
-function get_unique_name($file_name, $folder){
-	if (file_exists($folder.$file_name)) {
+function get_unique_name($file_name, $directory){
+	if (file_exists($directory.$file_name)) {
 		$prefix = substr($file_name, 0, strrpos($file_name, '.'));
 		$extension = substr($file_name, strrpos($file_name, '.') + 1);
 		
@@ -131,7 +137,7 @@ function get_unique_name($file_name, $folder){
 			// The first renamed file
 			$rtn = $prefix.'-1.'.$extension;
 		}
-		return $rtn;
+		return get_unique_name($rtn, $directory);
 	} else {
 		return $file_name;
 	}
@@ -139,15 +145,19 @@ function get_unique_name($file_name, $folder){
 
 /**
  * Return error msg with http status code 400
+ * @access public
+ * @param  string err_string          the error message
  */
 function return_error($err_string) {
     header("HTTP/1.0 400 Bad Request");
     header("Status: 400");
-    echo "<html><body><p>".$errString."</p></body></html>";
+    echo $err_string;
 }
 
 /**
  * Return success msg with http status code 200
+ * @access public
+ * @param  $success_string        the success message
  */
 function return_success($success_string) {
     echo "<html><body><p>".$success_string."</p></body></html>";
@@ -155,10 +165,9 @@ function return_success($success_string) {
 
 /**
  * This function is used for printing variables for debugging.
- * @access  public
- * @param   mixed $var	The variable to output
- * @param   string $title	The name of the variable, or some mark-up identifier.
- * @author  Joel Kronenberg
+ * @access public
+ * @param  mixed $var	    The variable to output
+ * @param  string $title	The name of the variable, or some mark-up identifier.
  */
 function debug($var, $title='') {
 	if (!defined('FLUID_IG_DEVEL') || !FLUID_IG_DEVEL) {
@@ -188,16 +197,15 @@ function debug($var, $title='') {
 /**
  * This function is used for printing variables into log file for debugging.
  * @access  public
- * @param   mixed $var	The variable to output
- * @param   string $log	The location of the log file. If not provided, use the default one.
- * @author  Cindy Qi Li
+ * @param   mixed $var	    The variable to output
+ * @param   string $log	    The location of the log file. If not provided, use the default one.
  */
 function debug_to_log($var, $log='') {
 	if (!defined('FLUID_IG_DEVEL') || !FLUID_IG_DEVEL) {
 		return;
 	}
 	
-	if ($log == '') $log = FLUID_IG_TEMP_DIR. 'debug.log';
+	if ($log == '') $log = 'temp/debug.log';
 	
 	$handle = fopen($log, 'a');
 	fwrite($handle, "\n\n");
