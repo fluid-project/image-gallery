@@ -4,7 +4,7 @@ define('FLUID_IG_INCLUDE_PATH', 'include/');
 include("include/vitals.inc.php");
 
 // The constants
-$allowed_file_extensions = array('gif', 'png', 'jpg', 'tif'); // The array of allowed file extensions: gif, png, jpg, tif
+$allowed_file_extensions = array('gif', 'png', 'jpg', 'jpeg', 'tif', 'tiff'); // The array of allowed file extensions: gif, png, jpg, tif
 $secs_to_timeout = 3600;  // The seconds to keep the uploaded images
 $temp_dir = 'temp/';
 
@@ -16,10 +16,9 @@ clean_history($temp_dir, $secs_to_timeout);
 // 2. wether session id is provided;
 // 3. wether the file extension is allowed;
 // 4. the existence of $temp_dir.
-debug_to_log($_FILES);
+
 // 1. Return error if there is no file received
 if (count($_FILES) == 0) {
-	debug_to_log("no file received");
 	return_error("No file is received at server.");
 	exit;
 }

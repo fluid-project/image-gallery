@@ -26,7 +26,8 @@ var demo = demo || {};
                 },
             	queueSettings: {
                     // Set the uploadURL to the URL for posting files to your server.
-                    uploadURL: "uploader.php?session="+sessionID
+                    uploadURL: "uploader.php?session="+sessionID,
+                    fileTypes: "*.gif;*.jpeg;*.jpg;*.png;*.tiff;*.tif"
                 },
                 listeners: {
                     onFileSuccess: function (file, responseText, xhr){
