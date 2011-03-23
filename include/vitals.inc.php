@@ -147,11 +147,21 @@ function get_unique_name($file_name, $directory){
  * Return error msg with http status code 400
  * @access public
  * @param  string err_string          the error message
+ *         integer return_err_in_html 1/0. Return error message in a complete html 
  */
-function return_error($err_string) {
+function return_error($err_string, $return_err_in_html) {
     header("HTTP/1.0 400 Bad Request");
     header("Status: 400");
+    
+    if ($return_err_in_html) {
+    	echo '<html><p>';
+    }
+    
     echo $err_string;
+    
+    if ($return_err_in_html) {
+    	echo '</p></html>';
+    }
 }
 
 /**

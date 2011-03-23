@@ -9,7 +9,7 @@ var demo = demo || {};
     	var sessionID = Math.random().toString(16).substring(2);
     	
         // Load the Uploader's template via AJAX and inject it into this page.
-        var templateURLSelector = "[INFUSION_PATH]/src/webapp/components/uploader/html/Uploader.html .fl-uploader";
+        var templateURLSelector = "aa/src/webapp/components/uploader/html/Uploader.html .fl-uploader";
         $("#uploader-contents").load(templateURLSelector, null, function () {
             
             // Initialize the Uploader
@@ -18,8 +18,8 @@ var demo = demo || {};
                     strategy: {
                         options: {
                             flashMovieSettings: {
-                                flashURL: "[INFUSION_PATH]/src/webapp/lib/swfupload/flash/swfupload.swf",
-                                flashButtonImageURL: "[INFUSION_PATH]/src/webapp/components/uploader/images/browse.png"
+                                flashURL: "aa/src/webapp/lib/swfupload/flash/swfupload.swf",
+                                flashButtonImageURL: "aa/src/webapp/components/uploader/images/browse.png"
                             }
                         }
                     }

@@ -1,20 +1,14 @@
 How to install:
-1. First of all, make sure PHP web server and git are installed. Moreover, infusion source code is pulled out locally.
+1. First of all, make sure you have PHP, Apache (or other web servers) and git installed. Moreover, infusion library is pulled out locally.
 
-2. Retrieve image gallery demo into :
+2. Retrieve image gallery demo and install:
    cd [webserver_document_root]         -- or any folder underneath your web server document root
    git clone git://github.com/cindyli/image-gallery.git
-
-3. Create an empty folder "temp" underneath "image-gallery" and grant it 777 permissoin. This is where all the uploaded images will reside.
    cd image-gallery
-   mkdir temp
-   chmod 777 temp
+   
+   ./install.sh        -- Note that install.sh asks for the input of the path to infusion library
 
-4. Modified the path in the listed scripts pointing to your infusion source code.
-   uploader.html   -  line 7 - 34
-   js/uploader.js  -  line 12, 21, 22 
-
-5. That's all. Now access via (just an example): http://localhost/image-gallery/uploader.html
+3. That's all. Now access via (just an example): http://localhost/image-gallery/uploader.html
 
 How it looks like:
 This image gallery uploader demo is composed by 2 parts: the multi-file uploader at left and an image viewer at right. 
