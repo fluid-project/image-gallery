@@ -6,7 +6,7 @@ How to install:
    git clone git://github.com/cindyli/image-gallery.git
    cd image-gallery
    
-   ./install.sh        -- Note that install.sh asks for the input of the path to infusion library
+   ./install.sh        -- Note that install.sh asks for the path to your local infusion library
 
 3. That's all. Now access via (just an example): http://localhost/image-gallery/uploader.html
 
@@ -21,12 +21,11 @@ The work flow:
 3. If anything goes wrong at PHP server, for instance, no file is received, session token is not provided, invalid file extension, or temp/ folder does not exist, the server returns a error message with http status code 400. The client displays the error on the page along with the name of the corresponding file.
 
 A few constraints performed at PHP server:
-1. The server removes the temporary folder created for each session that are inactive for over an hour. This is performed in uploader.php as the first thing whenever it's called.
+1. Removes the temporary folder created for each session that are inactive for over an hour. This is performed in uploader.php as the first thing whenever it's called.
 
 2. For security reason, the server only allows the upload of these file types: jpg, jpeg, gif, png, tif, tiff
 
-3. When the file with the same name is uploaded twice, a unique incremental number is appended to the second file name to ensure the uniqueness of each uploaded image.
-   for instance, "1.jpg" will be renamed to "1-1.jpg" at the second upload.
+3. Rejects the same file that has already been uploaded.
    
 Questions:
 1. in uploader.html, line 37, "styles.css" is linked in at "the uploader demo" section, should it be moved to the top of the script to be together with other .css

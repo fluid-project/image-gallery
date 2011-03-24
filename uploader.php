@@ -8,7 +8,7 @@ $allowed_file_extensions = array('gif', 'png', 'jpg', 'jpeg', 'tif', 'tiff'); //
 $secs_to_timeout = 3600;  // The seconds to keep the uploaded images
 $temp_dir = 'temp/';
 
-// Removed all the folders that are older than 3600 seconds
+// Remove all the folders that are older than 3600 seconds
 clean_history($temp_dir, $secs_to_timeout);
 
 if (isset($_REQUEST['isSingleUploader']) && $_REQUEST['isSingleUploader']) {
@@ -19,10 +19,11 @@ if (isset($_REQUEST['isSingleUploader']) && $_REQUEST['isSingleUploader']) {
 }
 
 // Error checkings:
-// 1. wether the file is received;
-// 2. wether session id is provided;
-// 3. wether the file extension is allowed;
-// 4. the existence of $temp_dir.
+// 1. whether the file is received;
+// 2. whether session id is provided;
+// 3. whether the file extension is allowed;
+// 4. whether $temp_dir exists;
+// 5. whether the file has been uploaded.
 
 // 1. Return error if there is no file received
 if (count($_FILES) == 0) {
@@ -52,7 +53,7 @@ foreach ($_FILES as $name => $file_data) {
 		exit;
 	}
 	
-	// Find or even create the image folder for this round of upload 
+	// Find or even create the image folder, if it does not exist, for this round of upload 
 	$image_folder = $temp_dir . $_REQUEST['session'].'/';
 	if (!file_exists($image_folder) && !mkdir($image_folder)) {
 		return_error('Cannot create image folder <span style="font: bold">'.$image_folder.'</span>.', $return_err_in_html);
@@ -60,10 +61,12 @@ foreach ($_FILES as $name => $file_data) {
 	}
 	// END OF error checking
 	
-	// Get a unique file name in case the file with the same name has been uploaded before
-	$file_name = get_unique_name($file_name, $image_folder);
-	
 	$destination = $image_folder.$file_name;
+	// 5. Return error if the file has been uploaded
+	if (file_exists($destination)) {
+		return_error($file_name.' has already been uploaded.', $return_err_in_html);
+		exit;
+	}
 	
 	// Copy the uploaded file into the image folder
 	move_uploaded_file($file_data['tmp_name'], $destination);

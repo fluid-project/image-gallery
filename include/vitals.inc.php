@@ -113,37 +113,6 @@ function clean_history($directory, $secs_to_live) {
 }
 
 /**
- * Ensure the uniqueness of the file name, $file_name, in the directory $directory.
- * If the file with the same name already exists in the directory, attach suffix "-N" to the name. 
- * N is a incremented number calculated base on the existing file names.
- * For instance, if "1.jpg" already exists, return "1-1.jpg"; if "1-1.jpg" already exists, return "1-2.jpg"
- * @param string $file_name      the file name to check
- *        string $directory      the folder that the file resides
- * @return string, a unique file name
- */
-function get_unique_name($file_name, $directory){
-	if (file_exists($directory.$file_name)) {
-		$prefix = substr($file_name, 0, strrpos($file_name, '.'));
-		$extension = substr($file_name, strrpos($file_name, '.') + 1);
-		
-		$pos_of_dash = strrpos($prefix, '-');
-		
-		if ($pos_of_dash > 0) {
-			// The renamed file with the counter already exists. Increment the counter in the file name by 1
-			$str_before_dash = substr($prefix, 0, $pos_of_dash);
-			$int_after_dash = intval(substr($prefix, $pos_of_dash + 1));
-			$rtn = $str_before_dash.'-'.($int_after_dash+1).'.'.$extension;
-		} else {
-			// The first renamed file
-			$rtn = $prefix.'-1.'.$extension;
-		}
-		return get_unique_name($rtn, $directory);
-	} else {
-		return $file_name;
-	}
-}
-
-/**
  * Return error msg with http status code 400
  * @access public
  * @param  string err_string          the error message

@@ -12,7 +12,9 @@ mkdir temp
 chmod 777 temp
 
 # Set the correct infusion path
-sed "s#\[INFUSION_PATH\]#"$infusion_path"#g" uploader.html > uploader.html
-sed "s#\[INFUSION_PATH\]#"$infusion_path"#g" js/uploader.js > js/uploader.js
+sed "s#\[INFUSION_PATH\]#"$infusion_path"#g" uploader.html > uploader_new.html
+mv uploader_new.html uploader.html
+sed "s#\[INFUSION_PATH\]#"$infusion_path"#g" js/uploader.js > js/uploader_new.js
+mv js/uploader_new.js js/uploader.js
 
 exit
