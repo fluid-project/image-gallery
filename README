@@ -6,7 +6,8 @@ How to install:
    git clone git://github.com/cindyli/image-gallery.git
    cd image-gallery
    
-   ./install.sh        -- Note that install.sh asks for the path to your local infusion library
+   dos2unix install.sh     -- convert the installation script in DOS/MAC format to UNIX format
+   ./install.sh            -- install.sh asks for the path to your local infusion library
 
 3. That's all. Now access via (just an example): http://localhost/image-gallery/uploader.html
 
