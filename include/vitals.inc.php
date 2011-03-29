@@ -113,24 +113,25 @@ function clean_history($directory, $secs_to_live) {
 }
 
 /**
- * Return error msg with http status code 400
+ * Return error message with the http status code 403
  * @access public
  * @param  string err_string          the error message
  *         integer return_err_in_html 1/0. Return error message in a complete html 
  */
 function return_error($err_string, $return_err_in_html) {
-    header("HTTP/1.0 400 Bad Request");
-    header("Status: 400");
-    
     if ($return_err_in_html) {
-    	echo '<html><p>';
+    	$error = '<html><p><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>';
     }
     
-    echo $err_string;
+    $error .= $err_string;
     
     if ($return_err_in_html) {
-    	echo '</p></html>';
+    	$error .= '</p></html>';
     }
+
+    header("HTTP/1.1 403 Forbidden", TRUE, 403);
+    header('Content-length: '. strlen($error));
+    echo $error;
 }
 
 /**

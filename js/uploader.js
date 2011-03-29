@@ -34,7 +34,7 @@ var demo = demo || {};
                         $('#image-space').append('<img src="' + responseText + '" alt="' + file.name + '" class="image-frame" />');
                     },
                     onFileError: function (file, error, status, xhr) {
-                        $('#server-error').append(file.name + " - " + xhr.responseText + "<br />");
+                        $('#server-error').append(file.name + " : Failed uploading. HTTP Status Code: " + status + "<br />");
                     }
                 }
             });
