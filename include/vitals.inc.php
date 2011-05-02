@@ -3,6 +3,9 @@ if (!defined('FLUID_IG_INCLUDE_PATH')) { exit; }
 
 define('FLUID_IG_DEVEL', 1);
 
+// set the default timezone to avoid the warning of "cannot rely on system timezone"
+date_default_timezone_set('America/New_York');
+
 // get the protocol
 if (isset($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on')) {
 	$server_protocol = 'https://';
