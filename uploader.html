@@ -41,18 +41,43 @@
     <body>
 
         <!-- Basic upload controls, used when JavaScript is unavailable -->
-        <form action="uploader.php" method="post" enctype="multipart/form-data" class="fl-progEnhance-basic" id="single-file-uploader">
-            <input type="hidden" name="isSingleUploader" value="1">
+        <div id="uploader">
+            <form action="uploader.php" method="post" enctype="multipart/form-data" class="fl-progEnhance-basic">
+                <input type="hidden" name="isSingleUploader" value="1">
+                
+                <p>Use the Browse button to add a file, and the Save button to upload it.</p>
+                <input name="fileData" type="file" />
+                <input class="fl-uploader-basic-save" type="submit" value="Save"/>
+            </form>
             
-            <p>Use the Browse button to add a file, and the Save button to upload it.</p>
-            <input name="fileData" type="file" />
-            <input class="fl-uploader-basic-save" type="submit" value="Save"/>
-        </form>
-        
-        <div id="uploader-contents">
-            <!-- The Uploader's template will be injected via AJAX into this container. -->
+            <div>
+                <fieldset>
+                    <legend>Settings for Multi-file Uploader</legend>
+                    <table class="settings-table no-border">
+                        <tr>
+                            <td class="no-border"><label for="file-size-limit">File Size Limit:</label></td>
+                            <td class="no-border"><input id="file-size-limit" type="text" /> in bytes</td>
+                        </tr>
+                        <tr>
+                            <td class="no-border"><label for="file-queue-limit">File Queue Limit:</label></td>
+                            <td class="no-border"><input id="file-queue-limit" type="text" /></td>
+                        </tr>
+                        <tr>
+                            <td class="no-border"><label for="allowed-file-type">Allowed File Types:</label></td>
+                            <td class="no-border"><input id="allowed-file-type" name="allowed-file-type" type="text" /></td>
+                        </tr>
+                        <tr>
+                            <td class="no-border" colspan="2">(Separate each file type with semi-colon. Example: *.gif;*.jpeg;)</td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+            
+            <div id="multi-file-uploader">
+                <!-- The Uploader's template will be injected via AJAX into this container. -->
+            </div>
         </div>
-            
+        
         <div id="image-viewer">
             <!-- The container to display all the uploaded images. -->
             <h2>Uploaded images:</h2>
