@@ -48,6 +48,10 @@
 	border:0 none; 
 }
 
+.hide-me {
+	visibility: hidden;
+}
+
 fieldset {
 	border: 1px solid #000000;
 }

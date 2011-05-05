@@ -8,7 +8,7 @@ var demo = demo || {};
         var sessionID = Math.random().toString(16).substring(2);
     
         // Load the Uploader's template via AJAX and inject it into this page.
-        var templateURLSelector = "../infusion/src/webapp/components/uploader/html/Uploader.html .fl-uploader";
+        var templateURLSelector = "[INFUSION_PATH]/src/webapp/components/uploader/html/Uploader.html .fl-uploader";
         var defaultAllowedFileType = "*.gif;*.jpeg;*.jpg;*.png;*.tiff;*.tif";
         var defaultFileSizeLimit = "20480";
         var defaultfileUploadLimit = 0;
@@ -46,6 +46,15 @@ var demo = demo || {};
                     }
                 });
             });
+        	
+        	// show the section of adjusting multi-file uploader settings only if the multi-file uploader is presented
+        	if (typeof fluid.staticEnvironment.supportsBinaryXHR != 'undefined' || 
+                typeof fluid.staticEnvironment.supportsFormData != 'undefined' ||
+                typeof fluid.staticEnvironment.supportsFlash != 'undefined') {
+        		$("#multi-file-uploader-settings").removeClass("hide-me");
+        	} else {
+        		$("#multi-file-uploader-settings").addClass("hide-me");
+        	}
         };
         
         $("input").change(function (){
@@ -57,7 +66,6 @@ var demo = demo || {};
         	fileSizeLimit = (fileSizeLimit === "") ? defaultFileSizeLimit : parseInt(fileSizeLimit);
         	fileUploadLimit = (fileUploadLimit === "") ? defaultfileUploadLimit : parseInt(fileUploadLimit);
         	
-//        	alert("file type: "+ allowedFileType+"; file size: "+fileSizeLimit+"; file queue: "+ fileUploadLimit);
         	instantiateUploader(allowedFileType, fileSizeLimit, fileUploadLimit);
         });
 
