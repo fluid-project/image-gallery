@@ -55,21 +55,48 @@ var demo = demo || {};
                         fileSizeLimit: "20480",
                         fileUploadLimit: 0
                     },
+                    // Boil Uploader's onFileSuccess and onFileError to match our component's semantics.
+                    events: {
+                        onImageSuccess: {
+                            event: "onFileSuccess",
+                            args: [
+                                {
+                                    fileName: "{arguments}.0.name",
+                                    srcURL: "{arguments}.1"
+                                }
+                            ]
+                        },
+                        onError: {
+                            event: "onFileError",
+                            args: [
+                                {
+                                    fileName: "{arguments}.0.name",
+                                    statusCode: "{arguments}.2"
+                                }
+                            ]
+                        }
+                    },
                     listeners: {
-                        onFileSuccess: "{imagesView}.showFile",
-                        onFileError: "{errorsView}.showError"
+                        onImageSuccess: "{imagesView}.render",
+                        onError: "{errorsView}.render"
                     }
                 }
             },
             
             imagesView: {
-                type: "demo.imageGallery.imagesView",
-                container: "{imageGallery}.dom.images"
+                type: "demo.imageGallery.simpleRenderer",
+                container: "{imageGallery}.dom.images",
+                options: {
+                    template: "<img src='%srcURL' alt='%fileName' class='image-frame' />"
+                }
             },
             
             errorsView: {
-                type: "demo.imageGallery.errorsView",
-                container: "{imageGallery}.dom.errors"
+                type: "demo.imageGallery.simpleRenderer",
+                container: "{imageGallery}.dom.errors",
+                options: {
+                    template: "<div>%fileName failed to upload. HTTP status code: %statusCode</div>"
+                }
             },
             
             settings: {
@@ -124,52 +151,23 @@ var demo = demo || {};
         that.loadUploaderTemplate();
     };
     
-    demo.imageGallery.renderAndAppend = function(container, template, values) {
-        var renderedMarkup = fluid.stringTemplate(template, values);
-        container.append(renderedMarkup);
+    
+    /**
+     * SimpleRenderer injects a single element rendered from a string template into the DOM.
+     */
+    fluid.defaults("demo.imageGallery.simpleRenderer", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        finalInitFunction: "demo.imageGallery.simpleRenderer.init",
+        template: ""
+    });
+    
+    demo.imageGallery.simpleRenderer.init = function (that) {
+        that.render = function (values) {
+            var renderedMarkup = fluid.stringTemplate(that.options.template, values);
+            that.container.append(renderedMarkup);
+        };
     };
     
-    /**
-     * ImagesView manages the displayed images area of the page.
-     */
-    fluid.defaults("demo.imageGallery.imagesView", {
-        gradeNames: ["fluid.viewComponent", "autoInit"],
-        invokers: {
-            showFile: {
-                funcName: "demo.imageGallery.renderAndAppend",
-                args: [
-                    "{imagesView}.container",
-                    "{imagesView}.options.imageMarkup",
-                    {
-                        fileName: "{arguments}.0.name",
-                        srcURL: "{arguments}.1"
-                    }
-                ]
-            }
-        },
-        imageMarkup: "<img src='%srcURL' alt='%fileName' class='image-frame' />"
-    });
-    
-    /**
-     * ErrorsView displays any server errors to the user.
-     */
-    fluid.defaults("demo.imageGallery.errorsView", {
-        gradeNames: ["fluid.viewComponent", "autoInit"],
-        invokers: {
-            showError: {
-                funcName: "demo.imageGallery.renderAndAppend",
-                args: [
-                    "{errorsView}.container",
-                    "{errorsView}.options.errorMarkup",
-                    {
-                        fileName: "{arguments}.0.name",
-                        statusCode: "{arguments}.2"
-                    }
-                ]
-            }
-        },
-        errorMarkup: "<div>%fileName failed to upload. HTTP status code: %statusCode</div>"
-    });
     
     /**
      * Settings controls the form that allow a user to customize the Uploader's options.
