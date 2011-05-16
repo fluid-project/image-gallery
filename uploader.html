@@ -4,36 +4,36 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Uploader</title>
 
-        <link rel="stylesheet" type="text/css" href="[INFUSION_PATH]/src/webapp/framework/fss/css/fss-reset.css" />
-        <link rel="stylesheet" type="text/css" href="[INFUSION_PATH]/src/webapp/framework/fss/css/fss-layout.css" />
-        <link rel="stylesheet" type="text/css" href="[INFUSION_PATH]/src/webapp/components/uploader/css/Uploader.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion/src/webapp/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion/src/webapp/framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion/src/webapp/components/uploader/css/Uploader.css" />
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
         
         <!-- Fluid and jQuery Dependencies -->
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/lib/jquery/core/js/jquery.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/lib/jquery/ui/js/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/framework/core/js/jquery.keyboard-a11y.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/lib/jquery/plugins/scrollTo/js/jquery.scrollTo.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/lib/swfobject/js/swfobject.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/lib/swfupload/js/swfupload.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/lib/json/js/json2.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/lib/jquery/ui/js/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/jquery.keyboard-a11y.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/lib/jquery/plugins/scrollTo/js/jquery.scrollTo.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/lib/swfobject/js/swfobject.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/lib/swfupload/js/swfupload.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/lib/json/js/json2.js"></script>
 
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/framework/core/js/Fluid.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/framework/core/js/DataBinding.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/framework/core/js/FluidIoC.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/framework/core/js/FluidDocument.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/framework/core/js/FluidView.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/framework/enhancement/js/ProgressiveEnhancement.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/DataBinding.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidIoC.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidDocument.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidView.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/enhancement/js/ProgressiveEnhancement.js"></script>
         
         <!-- Uploader dependencies -->
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/components/uploader/js/Uploader.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/components/uploader/js/FileQueue.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/components/progress/js/Progress.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/components/uploader/js/FileQueueView.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/components/uploader/js/FlashUploaderSupport.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/components/uploader/js/Flash9UploaderSupport.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/components/uploader/js/HTML5UploaderSupport.js"></script>
-        <script type="text/javascript" src="[INFUSION_PATH]/src/webapp/components/uploader/js/DemoUploadManager.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/Uploader.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/FileQueue.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/components/progress/js/Progress.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/FileQueueView.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/FlashUploaderSupport.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/Flash9UploaderSupport.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/HTML5UploaderSupport.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/components/uploader/js/DemoUploadManager.js"></script>
 
         <!-- The Uploader demo -->
         <script type="text/javascript" src="js/uploader.js"></script>
@@ -49,29 +49,6 @@
                 <input name="fileData" type="file" />
                 <input class="fl-uploader-basic-save" type="submit" value="Save"/>
             </form>
-            
-            <div id="multi-file-uploader-settings" class="hide-me">
-                <fieldset>
-                    <legend>Settings for Multi-file Uploader</legend>
-                    <table class="settings-table no-border">
-                        <tr>
-                            <td class="no-border"><label for="file-size-limit">File Size Limit:</label></td>
-                            <td class="no-border"><input id="file-size-limit" type="text" /> in KB</td>
-                        </tr>
-                        <tr>
-                            <td class="no-border"><label for="file-queue-limit">File Queue Limit:</label></td>
-                            <td class="no-border"><input id="file-queue-limit" type="text" /></td>
-                        </tr>
-                        <tr>
-                            <td class="no-border"><label for="allowed-file-type">Allowed File Types:</label></td>
-                            <td class="no-border"><input id="allowed-file-type" name="allowed-file-type" type="text" /></td>
-                        </tr>
-                        <tr>
-                            <td class="no-border" colspan="2">(Separate each file type with semi-colon. Example: *.gif;*.jpeg;)</td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </div>
             
             <div id="multi-file-uploader">
                 <!-- The Uploader's template will be injected via AJAX into this container. -->
@@ -89,12 +66,31 @@
         </div>
         
         <div id="demo-notes">
-            1. Your session will stay active for an hour. After one hour, all the uploaded images will be erased from the server.<br />
-            2. Allowed uploaded file types (case insensitive): jpg, png, gif, tif
+            Your session will stay active for an hour. After one hour, all the uploaded images will be erased from the server.<br />
         </div>
-        
+
+        <div id="multi-file-uploader-settings" class="hide-me">
+            <fieldset>
+                <legend>Uploader Settings</legend>
+                <table class="settings-table no-border">
+                    <tr>
+                        <td class="no-border"><label for="file-size-limit">File Size Limit:</label></td>
+                        <td class="no-border"><input id="file-size-limit" type="text" /> in KB</td>
+                    </tr>
+                    <tr>
+                        <td class="no-border"><label for="file-queue-limit">File Queue Limit:</label></td>
+                        <td class="no-border"><input id="file-queue-limit" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td class="no-border"><label for="allowed-file-type">Allowed File MIME Types:</label></td>
+                        <td class="no-border"><input id="allowed-file-type" name="allowed-file-type" type="text" /></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+                
         <script type="text/javascript">
-            demo.initUploader();
+            demo.imageGallery("body");
         </script>
          
     </body>
