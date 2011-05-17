@@ -57,7 +57,7 @@ var demo = demo || {};
                     },
                     // Boil Uploader's onFileSuccess and onFileError to match our component's semantics.
                     events: {
-                        onImageSuccess: {
+                        onSuccess: {
                             event: "onFileSuccess",
                             args: [
                                 {
@@ -77,7 +77,7 @@ var demo = demo || {};
                         }
                     },
                     listeners: {
-                        onImageSuccess: "{imagesView}.render",
+                        onSuccess: "{imagesView}.render",
                         onError: "{errorsView}.render"
                     }
                 }
@@ -101,7 +101,13 @@ var demo = demo || {};
             
             settings: {
                 type: "demo.imageGallery.settings",
-                createOnEvent: "onReady"
+                createOnEvent: "onReady",
+                options: {
+                    model: "{imageGallery}.options.components.uploader.options.queueSettings",
+                    listeners: {
+                        modelChanged: "{imageGallery}.resetUploader"
+                    }
+                }
             }
         },
         
@@ -138,12 +144,6 @@ var demo = demo || {};
         };
         
         that.resetUploader = function (options) {
-            // TODO: use {imageGallery}.options.component.uploader.options.queueSetting as
-            // the model for the Settings component.
-            var queueSettings = that.options.components.uploader.options.queueSettings;
-            fluid.each(options, function (value, key) {
-                queueSettings[key] = value;
-            });
             that.destroyUploader();
             that.loadUploaderTemplate();
         };
@@ -173,43 +173,39 @@ var demo = demo || {};
      * Settings controls the form that allow a user to customize the Uploader's options.
      */
     fluid.defaults("demo.imageGallery.settings", {
-        gradeNames: ["fluid.viewComponent", "autoInit"],
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
         finalInitFunction: "demo.imageGallery.settings.init",
         selectors: {
-            fileTypes: "#allowed-file-type",
-            fileSizeLimit: "#file-size-limit",
-            fileUploadLimit: "#file-queue-limit",
-            inputs: "input"
+            fileSizeLimit: "#fileSizeLimit",
+            fileUploadLimit: "#fileUploadLimit",
+            fileTypes: "#fileTypes"
+        },
+        protoTree: {
+            fileSizeLimit: "${fileSizeLimit}",
+            fileUploadLimit: "${fileUploadLimit}",
+            fileTypes: "${fileTypes}"
         },
         events: {
-            onOptionChanged: null
-        },
-        listeners: {
-            onOptionChanged: "{imageGallery}.resetUploader"
+            modelChanged: null
         }
     });
     
     demo.imageGallery.settings.init = function (that) {
-        that.container.removeClass("hide-me");
-        
-        // TODO: Use the renderer and data binding for this.
-        that.locate("inputs").change(function () {
-            // Trim and parse input from the form fields.
-            var options = {
-                fileTypes: $.trim(that.locate("fileTypes").val()),
-                fileSizeLimit: parseInt($.trim(that.locate("fileSizeLimit").val()), 10),
-                fileUploadLimit: parseInt($.trim(that.locate("fileUploadLimit").val()), 10)
-            };
-            
-            // Delete any empty options so we don't override the default.
-            fluid.each(options, function (value, key) {
-                if (!value) {
-                    delete options[key];
-                }
-            });
-
-        	that.events.onOptionChanged.fire(options);         	
+        // TODO: Replace these with model transformation.
+        that.events.prepareModelForRender.addListener(function (model) {
+            model.fileTypes = model.fileTypes ? model.fileTypes.join(",") : undefined;
         });
+        that.applier.modelChanged.addListener("fileTypes", function (model) {
+            model.fileTypes = model.fileTypes ? model.fileTypes.split(",") : undefined;
+        });
+        
+        // TODO: Replace this with a declarative listener when the framework supports it.
+        that.applier.modelChanged.addListener("*", function (model) {
+            that.events.modelChanged.fire(model);
+        });
+        
+        that.refreshView();
+        that.container.removeClass("fl-hidden");
     };
     
     fluid.demands("demo.imageGallery.settings", ["demo.imageGallery", "fluid.uploader.multiFileUploader"], {

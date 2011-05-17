@@ -23,6 +23,12 @@
         <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidIoC.js"></script>
         <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidDocument.js"></script>
         <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidView.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidRequests.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/lib/fastXmlPull/js/fastXmlPull.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/renderer/js/fluidParser.js"></script>
+        <script type="text/javascript" src="../infusion/src/webapp/framework/renderer/js/RendererUtilities.js"></script>
         <script type="text/javascript" src="../infusion/src/webapp/framework/enhancement/js/ProgressiveEnhancement.js"></script>
         
         <!-- Uploader dependencies -->
@@ -68,22 +74,22 @@
         <div id="demo-notes">
             Your session will stay active for an hour. After one hour, all the uploaded images will be erased from the server.<br />
         </div>
-
-        <div id="multi-file-uploader-settings" class="hide-me">
+        
+        <div id="multi-file-uploader-settings" class="fl-hidden">
             <fieldset>
                 <legend>Uploader Settings</legend>
                 <table class="settings-table no-border">
                     <tr>
-                        <td class="no-border"><label for="file-size-limit">File Size Limit:</label></td>
-                        <td class="no-border"><input id="file-size-limit" type="text" /> in KB</td>
+                        <td class="no-border"><label for="fileSizeLimit">File Size Limit:</label></td>
+                        <td class="no-border"><input id="fileSizeLimit" type="text" /> in KB</td>
                     </tr>
                     <tr>
-                        <td class="no-border"><label for="file-queue-limit">File Queue Limit:</label></td>
-                        <td class="no-border"><input id="file-queue-limit" type="text" /></td>
+                        <td class="no-border"><label for="fileUploadLimit">File Queue Limit:</label></td>
+                        <td class="no-border"><input id="fileUploadLimit" type="text" /></td>
                     </tr>
                     <tr>
-                        <td class="no-border"><label for="allowed-file-type">Allowed File MIME Types:</label></td>
-                        <td class="no-border"><input id="allowed-file-type" name="allowed-file-type" type="text" /></td>
+                        <td class="no-border"><label for="fileTypes">Allowed File MIME Types:</label></td>
+                        <td class="no-border"><input id="fileTypes" name="allowedFileType" type="text" /></td>
                     </tr>
                 </table>
             </fieldset>
