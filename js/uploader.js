@@ -122,7 +122,12 @@ var demo = demo || {};
             onReady: null
         },
         
-        templateURLSelector: "../infusion/src/webapp/components/uploader/html/Uploader.html .fl-uploader",
+        // The URL to the Uploader's template.
+        templateURL: "../infusion/src/webapp/components/uploader/html/Uploader.html",
+        
+        // A selector pointing to the portion of the Uploader's template that we're interested in.
+        templateSelector: ".fl-uploader",
+        
         serverURLPrefix: "uploader.php?session="
     });
     
@@ -131,13 +136,14 @@ var demo = demo || {};
         that.uploadURL = that.options.serverURLPrefix + that.sessionID;    
         
         that.loadUploaderTemplate = function () {
-            that.locate("uploader").load(that.options.templateURLSelector, null, function () {
+            var urlSelector = that.options.templateURL + " " + that.options.templateSelector;
+            that.locate("uploader").load(urlSelector, function () {
                 that.events.onReady.fire();
             });
         };
         
         that.destroyUploader = function () {
-            if (typeof (that.uploader.strategy.engine) !== "undefined") {
+            if (!fluid.get(that, "uploader.strategy.engine")) {
                 that.uploader.strategy.engine.swfUpload.destroy();
             }
             that.locate("uploader").empty();
