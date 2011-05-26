@@ -14,11 +14,12 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 define('FLUID_IG_INCLUDE_PATH', 'include/');
 
 include("include/vitals.inc.php");
+$settings = parse_ini("image-gallery-settings.ini");
 
 // The constants
-$allowed_file_extensions = array('gif', 'png', 'jpg', 'jpeg', 'tif', 'tiff'); // The array of allowed file extensions: gif, png, jpg, tif
-$secs_to_timeout = 3600;  // The seconds to keep the uploaded images
-$temp_dir = 'temp/';
+$allowed_file_extensions = $settings["allowed_file_extensions"]; // The array of allowed file extensions: gif, png, jpg, tif
+$secs_to_timeout = $settings["secs_to_timeout"];  // The seconds to keep the uploaded images
+$temp_dir = $settings["temp_dir"];
 
 // Remove all the folders that are older than 3600 seconds
 clean_history($temp_dir, $secs_to_timeout);

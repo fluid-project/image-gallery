@@ -34,6 +34,20 @@ var demo = demo || {};
                 }
             },
             
+            pathResolver: {
+                type: "demo.imageGallery.pathResolver",
+                options: {
+                    prefixes: {
+                        infusion: "../infusion"
+                    },
+                    paths: {
+                        flashURL: "%infusion/src/webapp/lib/swfupload/flash/swfupload.swf",
+                        flashButtonImageURL: "%infusion/src/webapp/components/uploader/images/browse.png",
+                        templateURL: "%infusion/src/webapp/components/uploader/html/Uploader.html"
+                    }
+                }
+            },
+            
             uploader: {
                 type: "fluid.uploader",
                 createOnEvent: "onReady",
@@ -43,8 +57,8 @@ var demo = demo || {};
                         strategy: {
                             options: {
                                 flashMovieSettings: {
-                                    flashURL: "../infusion/src/webapp/lib/swfupload/flash/swfupload.swf",
-                                    flashButtonImageURL: "../infusion/src/webapp/components/uploader/images/browse.png"
+                                    flashURL: "{pathResolver}.paths.flashURL",
+                                    flashButtonImageURL: "{pathResolver}.paths.flashButtonImageURL"
                                 }
                             }
                         }
@@ -122,13 +136,10 @@ var demo = demo || {};
             onReady: null
         },
         
-        // The URL to the Uploader's template.
-        templateURL: "../infusion/src/webapp/components/uploader/html/Uploader.html",
-        
         // A selector pointing to the portion of the Uploader's template that we're interested in.
         templateSelector: ".fl-uploader",
         
-        serverURLPrefix: "uploader.php?session="
+        serverURLPrefix: "uploader-server.php?session="
     });
     
     demo.imageGallery.init = function (that) {
@@ -136,7 +147,7 @@ var demo = demo || {};
         that.uploadURL = that.options.serverURLPrefix + that.sessionID;    
         
         that.loadUploaderTemplate = function () {
-            var urlSelector = that.options.templateURL + " " + that.options.templateSelector;
+            var urlSelector = that.pathResolver.paths.templateURL + " " + that.options.templateSelector;
             that.locate("uploader").load(urlSelector, function () {
                 that.events.onReady.fire();
             });
@@ -158,6 +169,17 @@ var demo = demo || {};
         that.loadUploaderTemplate();
     };
     
+    fluid.defaults("demo.imageGallery.pathResolver", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        finalInitFunction: "demo.imageGallery.pathResolver.init"
+    });
+    
+    demo.imageGallery.pathResolver.init = function (that) {
+        that.paths = {};
+        fluid.each(that.options.paths, function (path, name) {
+            that.paths[name] = fluid.stringTemplate(path, that.options.prefixes);
+        });
+    };
     
     /**
      * SimpleRenderer injects a single element rendered from a string template into the DOM.
