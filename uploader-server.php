@@ -14,7 +14,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 define('FLUID_IG_INCLUDE_PATH', 'include/');
 
 include("include/vitals.inc.php");
-$settings = parse_ini("image-gallery-settings.ini");
+$settings = parse_ini_file("image-gallery-settings.ini");
 
 // The constants
 $allowed_file_extensions = $settings["allowed_file_extensions"]; // The array of allowed file extensions: gif, png, jpg, tif
