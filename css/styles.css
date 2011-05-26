@@ -1,5 +1,4 @@
-/*#uploader-contents, #single-file-uploader {*/
-#uploader {
+.ig-uploaders {
     margin-left: 2em;
     margin-top: 5em;
     margin-bottom: 5em;
@@ -7,7 +6,7 @@
     float: left;
 }
 
-#image-viewer {
+.ig-imageViewer {
     margin-right: 2em;
     margin-top: 2em;
     width: 50%;
@@ -17,14 +16,14 @@
     min-height: 55em;
 }
 
-#demo-notes {
+.ig-notes {
     margin-left: 1em;
     clear: left;
     width: 40%;
     font-size: medium;
 }
 
-#server-error {
+.ig-serverErrors {
     margin-left: 1em;
     margin-bottom: 1em;
     clear: left;
@@ -34,22 +33,18 @@
     color: #FF0000;
 }
 
-.image-frame {
+.ig-imageFrame {
     float: left;
     margin: 0.5em;
     height: 150px;
 }
 
-.settings-table {
+.settingsTable {
 	border-spacing: 1px
 }
 
-.no-border {
+.noBorder {
 	border:0 none; 
-}
-
-.hide-me {
-	visibility: hidden;
 }
 
 fieldset {

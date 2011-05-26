@@ -87,7 +87,7 @@ var demo = demo || {};
                 type: "demo.imageGallery.simpleRenderer",
                 container: "{imageGallery}.dom.images",
                 options: {
-                    template: "<img src='%srcURL' alt='%fileName' class='image-frame' />"
+                    template: "<img src='%srcURL' alt='%fileName' class='ig-imageFrame' />"
                 }
             },
             
@@ -112,10 +112,10 @@ var demo = demo || {};
         },
         
         selectors: {
-            uploader: "#multi-file-uploader",
-            settings: "#multi-file-uploader-settings",
-            images: "#image-space",
-            errors: "#server-error"
+            uploader: ".ig-multiFileUploader",
+            settings: ".ig-settings",
+            images: ".ig-imageViewer-images",
+            errors: ".ig-serverErrors"
         },
         
         events: {
@@ -143,10 +143,11 @@ var demo = demo || {};
         };
         
         that.destroyUploader = function () {
-            if (!fluid.get(that, "uploader.strategy.engine")) {
-                that.uploader.strategy.engine.swfUpload.destroy();
-            }
             that.locate("uploader").empty();
+            if (fluid.get(that, "uploader.strategy.engine")) {
+                var su = that.uploader.strategy.engine.swfUpload;
+                su.destroy();
+            }
         };
         
         that.resetUploader = function (options) {
@@ -193,15 +194,19 @@ var demo = demo || {};
         },
         events: {
             modelChanged: null
+        },
+        styles: {
+            hidden: "fl-hidden"
         }
     });
     
     demo.imageGallery.settings.init = function (that) {
         // TODO: Replace these with model transformation.
         that.events.prepareModelForRender.addListener(function (model) {
-            model.fileTypes = model.fileTypes ? model.fileTypes.join(",") : undefined;
+            model.fileTypes = fluid.isArrayable(model.fileTypes) ? 
+                model.fileTypes.join(",") : model.fileTypes;
         });
-        that.applier.modelChanged.addListener("fileTypes", function (model) {
+        that.applier.modelChanged.addListener("*", function (model) {
             model.fileTypes = model.fileTypes ? model.fileTypes.split(",") : undefined;
         });
         
@@ -211,7 +216,7 @@ var demo = demo || {};
         });
         
         that.refreshView();
-        that.container.removeClass("fl-hidden");
+        that.container.removeClass(that.options.styles.hidden);
     };
     
     fluid.demands("demo.imageGallery.settings", ["demo.imageGallery", "fluid.uploader.multiFileUploader"], {

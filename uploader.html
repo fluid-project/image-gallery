@@ -46,59 +46,60 @@
         <script type="text/javascript" src="js/uploader.js"></script>
     </head>
     <body>
-
-        <!-- Basic upload controls, used when JavaScript is unavailable -->
-        <div id="uploader">
-            <form action="uploader.php" method="post" enctype="multipart/form-data" class="fl-progEnhance-basic">
-                <input type="hidden" name="isSingleUploader" value="1">
-                
-                <p>Use the Browse button to add a file, and the Save button to upload it.</p>
-                <input name="fileData" type="file" />
-                <input class="fl-uploader-basic-save" type="submit" value="Save"/>
-            </form>
+        <div class="ig-imageGallery">
+            <!-- Basic upload controls, used when JavaScript is unavailable -->
+            <div class="ig-uploaders">
+                <form action="uploader.php" method="post" enctype="multipart/form-data" class="fl-progEnhance-basic">
+                    <div>
+                        <input type="hidden" name="isSingleUploader" value="1" />
+                        <p>Use the Browse button to add a file, and the Save button to upload it.</p>
+                        <input name="fileData" type="file" />
+                        <input class="fl-uploader-basic-save" type="submit" value="Save"/>
+                    </div>
+                </form>
             
-            <div id="multi-file-uploader">
-                <!-- The Uploader's template will be injected via AJAX into this container. -->
+                <div class="ig-multiFileUploader">
+                    <!-- The Uploader's template will be injected via AJAX into this container. -->
+                </div>
+            </div>
+        
+            <div class="ig-imageViewer">
+                <!-- The container to display all the uploaded images. -->
+                <h2>Uploaded images:</h2>
+                <div class="ig-imageViewer-images"></div>
+            </div>
+        
+            <div class="ig-serverErrors">
+                <!-- The returned server error message will be displayed in this container. -->
+            </div>
+        
+            <div class="ig-notes">
+                Your session will stay active for an hour. After one hour, all the uploaded images will be erased from the server.<br />
+            </div>
+        
+            <div class="ig-settings fl-hidden">
+                <fieldset>
+                    <legend>Uploader Settings</legend>
+                    <table class="settingsTable noBorder">
+                        <tr>
+                            <td class="noBorder"><label for="fileSizeLimit">File Size Limit:</label></td>
+                            <td class="noBorder"><input id="fileSizeLimit" type="text" /> in KB</td>
+                        </tr>
+                        <tr>
+                            <td class="noBorder"><label for="fileUploadLimit">File Queue Limit:</label></td>
+                            <td class="noBorder"><input id="fileUploadLimit" type="text" /></td>
+                        </tr>
+                        <tr>
+                            <td class="noBorder"><label for="fileTypes">Allowed File MIME Types:</label></td>
+                            <td class="noBorder"><input id="fileTypes" name="allowedFileType" type="text" /></td>
+                        </tr>
+                    </table>
+                </fieldset>
             </div>
         </div>
         
-        <div id="image-viewer">
-            <!-- The container to display all the uploaded images. -->
-            <h2>Uploaded images:</h2>
-            <div id="image-space"></div>
-        </div>
-        
-        <div id="server-error">
-            <!-- The returned server error message will be displayed in this container. -->
-        </div>
-        
-        <div id="demo-notes">
-            Your session will stay active for an hour. After one hour, all the uploaded images will be erased from the server.<br />
-        </div>
-        
-        <div id="multi-file-uploader-settings" class="fl-hidden">
-            <fieldset>
-                <legend>Uploader Settings</legend>
-                <table class="settings-table no-border">
-                    <tr>
-                        <td class="no-border"><label for="fileSizeLimit">File Size Limit:</label></td>
-                        <td class="no-border"><input id="fileSizeLimit" type="text" /> in KB</td>
-                    </tr>
-                    <tr>
-                        <td class="no-border"><label for="fileUploadLimit">File Queue Limit:</label></td>
-                        <td class="no-border"><input id="fileUploadLimit" type="text" /></td>
-                    </tr>
-                    <tr>
-                        <td class="no-border"><label for="fileTypes">Allowed File MIME Types:</label></td>
-                        <td class="no-border"><input id="fileTypes" name="allowedFileType" type="text" /></td>
-                    </tr>
-                </table>
-            </fieldset>
-        </div>
-                
         <script type="text/javascript">
-            demo.imageGallery("body");
+            demo.imageGallery(".ig-imageGallery");
         </script>
-         
     </body>
 </html>
