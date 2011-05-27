@@ -1,6 +1,6 @@
 <?php
-    $settings = parse_ini_file("image-gallery-settings.ini");
-    $INFUSION = $settings["infusion"];
+define('FLUID_IG_INCLUDE_PATH', 'include/');
+include(FLUID_IG_INCLUDE_PATH . "vitals.inc.php");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -9,43 +9,43 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Uploader</title>
         
-        <link rel="stylesheet" type="text/css" href="<?php echo $INFUSION;?>/src/webapp/framework/fss/css/fss-reset.css" />
-        <link rel="stylesheet" type="text/css" href="<?php echo $INFUSION;?>/src/webapp/framework/fss/css/fss-layout.css" />
-        <link rel="stylesheet" type="text/css" href="<?php echo $INFUSION;?>/src/webapp/components/uploader/css/Uploader.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/css/Uploader.css" />
         <link rel="stylesheet" type="text/css" href="css/image-gallery.css" />
         
         <!-- Fluid and jQuery Dependencies -->
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/lib/jquery/core/js/jquery.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/lib/jquery/ui/js/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/core/js/jquery.keyboard-a11y.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/lib/jquery/plugins/scrollTo/js/jquery.scrollTo.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/lib/swfobject/js/swfobject.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/lib/swfupload/js/swfupload.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/lib/json/js/json2.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/lib/jquery/ui/js/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/core/js/jquery.keyboard-a11y.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/lib/jquery/plugins/scrollTo/js/jquery.scrollTo.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/lib/swfobject/js/swfobject.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/lib/swfupload/js/swfupload.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/lib/json/js/json2.js"></script>
 
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/core/js/Fluid.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/core/js/DataBinding.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/core/js/FluidIoC.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/core/js/FluidDocument.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/core/js/FluidView.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/core/js/FluidRequests.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/lib/fastXmlPull/js/fastXmlPull.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/renderer/js/fluidParser.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/renderer/js/RendererUtilities.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/framework/enhancement/js/ProgressiveEnhancement.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/core/js/DataBinding.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/core/js/FluidIoC.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/core/js/FluidDocument.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/core/js/FluidView.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/core/js/FluidRequests.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/lib/fastXmlPull/js/fastXmlPull.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/renderer/js/fluidParser.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/renderer/js/RendererUtilities.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/framework/enhancement/js/ProgressiveEnhancement.js"></script>
         
         <!-- Uploader dependencies -->
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/components/uploader/js/Uploader.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/components/uploader/js/FileQueue.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/components/progress/js/Progress.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/components/uploader/js/FileQueueView.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/components/uploader/js/MimeTypeExtensions.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/components/uploader/js/FlashUploaderSupport.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/components/uploader/js/Flash9UploaderSupport.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/components/uploader/js/HTML5UploaderSupport.js"></script>
-        <script type="text/javascript" src="<?php echo $INFUSION;?>/src/webapp/components/uploader/js/DemoUploadManager.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/Uploader.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/FileQueue.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/progress/js/Progress.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/FileQueueView.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/MimeTypeExtensions.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/FlashUploaderSupport.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/Flash9UploaderSupport.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/HTML5UploaderSupport.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/DemoUploadManager.js"></script>
 
         <!-- The Uploader demo -->
         <script type="text/javascript" src="js/image-gallery.js"></script>
@@ -115,7 +115,7 @@
                     pathResolver: {
                         options: {
                             prefixes: {
-                                infusion: "<?php echo $INFUSION;?>"
+                                infusion: "<?php echo FLUID_IG_INFUSION;?>"
                             }
                         }
                     }
