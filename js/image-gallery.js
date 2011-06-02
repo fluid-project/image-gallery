@@ -109,7 +109,7 @@ var demo = demo || {};
                 type: "demo.imageGallery.simpleRenderer",
                 container: "{imageGallery}.dom.errors",
                 options: {
-                    template: "<div>%fileName failed to upload. HTTP status code: %statusCode</div>"
+                    template: "<div class='igStyle-serverErrors'><span class='igStyle-errorTitle'>HTTP status code: %statusCode</span><span>%fileName failed to upload.</span> </div>"
                 }
             },
             

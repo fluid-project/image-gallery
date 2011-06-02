@@ -77,9 +77,7 @@ include(FLUID_IG_INCLUDE_PATH . "vitals.inc.php");
                 </div>
             </div>
             
-            <div class="igStyle-serverErrors ig-serverErrors">
-                <span class="igStyle-errorTitle">Something happened</span><br />
-                <span>Test error message</span>
+            <div class="ig-serverErrors">
                 <!-- The returned server error message will be displayed in this container. -->
             </div>
         

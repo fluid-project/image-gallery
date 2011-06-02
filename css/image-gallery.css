@@ -23,6 +23,7 @@
 
 .igStyle-serverErrors .igStyle-errorTitle {
     font-weight:bold;
+    display:block;
 }
 
 .igStyle-imageFrame {
