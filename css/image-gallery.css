@@ -1,52 +1,41 @@
-.ig-uploaders {
-    margin-left: 2em;
-    margin-top: 5em;
-    margin-bottom: 5em;
+.igStyle-imageGallery {
     width: 40%;
-    float: left;
+    margin-left: auto;
+    margin-right: auto;
+ }
+
+.igStyle-uploaders {
+    margin-bottom: 2em;
 }
 
-.ig-imageViewer {
-    margin-right: 2em;
-    margin-top: 2em;
-    width: 50%;
-    float: right;
+.igStyle-imageViewer {
     border: solid thin;
-    padding: 20px;
-    min-height: 55em;
+    min-height: 180px;
+    padding-left: 1em;
+    overflow: auto;
 }
 
-.ig-notes {
-    margin-left: 1em;
-    clear: left;
-    width: 40%;
-    font-size: medium;
+.igStyle-serverErrors {
+    border: 5px #aaffaa solid;
+    margin-top: 10px;
+    padding: 4px;
 }
 
-.ig-serverErrors {
-    margin-left: 1em;
-    margin-bottom: 1em;
-    clear: left;
-    width: 40%;
-    font-size: medium;
-    font-weight: bold;
-    color: #FF0000;
+.igStyle-serverErrors .igStyle-errorTitle {
+    font-weight:bold;
 }
 
-.ig-imageFrame {
+.igStyle-imageFrame {
     float: left;
     margin: 0.5em;
-    height: 150px;
+    max-width: 100px;
+    max-height: 75px;
 }
 
-.settingsTable {
-	border-spacing: 1px
+.igStyle-imageFrame {
+/* no styles yet */
 }
 
-.noBorder {
-	border:0 none; 
-}
-
-fieldset {
-	border: 1px solid #000000;
+#fileTypes{
+    margin-left: 20px;
 }

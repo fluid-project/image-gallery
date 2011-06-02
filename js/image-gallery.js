@@ -65,7 +65,7 @@ var demo = demo || {};
                     },
                     queueSettings: {
                         uploadURL: "{imageGallery}.uploadURL",
-                        fileTypes: ["image/gif", "image/jpeg", "image/png", "image/tiff"],
+                        fileTypes: ["image/bmp", "image/gif", "image/jpeg", "image/png", "image/tiff"],
                         fileSizeLimit: "20480",
                         fileUploadLimit: 0
                     },
@@ -101,7 +101,7 @@ var demo = demo || {};
                 type: "demo.imageGallery.simpleRenderer",
                 container: "{imageGallery}.dom.images",
                 options: {
-                    template: "<img src='%srcURL' alt='%fileName' class='ig-imageFrame' />"
+                    template: "<img src='%srcURL' alt='%fileName' class='igStyle-imageFrame' />"
                 }
             },
             
@@ -207,12 +207,49 @@ var demo = demo || {};
         selectors: {
             fileSizeLimit: "#fileSizeLimit",
             fileUploadLimit: "#fileUploadLimit",
-            fileTypes: "#fileTypes"
+            "fileTypesRowID:": ".fileTypes-row",
+            fileTypesInputID: ".fileTypes-choice",
+            fileTypesLabelID: ".fileTypes-label",
+        },
+        model: {
+            labelMap: {
+                fileSizeLimit: {
+                    labels: ["1", "5", "10", "15", "20"],
+                    values: ["1024", "5120", "10240", "15360", "20480"]
+                },
+                fileUploadLimit: {
+                    labels: ["No Limit", "5", "10", "15", "20"],
+                    values: ["0", "5", "10", "15", "20"]
+                },
+                fileTypes: {
+                    labels: ["BMP", "GIF", "JPG, JPEG, JPE, JFIF", "PNG", "TIF, TIFF"],
+                    values: ["image/bmp", "image/gif", "image/jpeg", "image/png", "image/tiff"]
+                }
+            }
         },
         protoTree: {
-            fileSizeLimit: "${fileSizeLimit}",
-            fileUploadLimit: "${fileUploadLimit}",
-            fileTypes: "${fileTypes}"
+            fileSizeLimit: {
+                optionnames: "${labelMap.fileSizeLimit.labels}",
+                optionlist: "${labelMap.fileSizeLimit.values}",
+                selection: "${fileSizeLimit}"
+            },
+            fileUploadLimit: {
+                optionnames: "${labelMap.fileUploadLimit.labels}",
+                optionlist: "${labelMap.fileUploadLimit.values}",
+                selection: "${fileUploadLimit}"
+            },
+            expander: {
+                type: "fluid.renderer.selection.inputs",
+                inputID: "fileTypesInputID",
+                tree: {
+                    optionnames: "${labelMap.fileTypes.labels}",
+                    optionlist: "${labelMap.fileTypes.values}",
+                    selection: "${fileTypes}"
+                },
+                rowID: "fileTypesRowID",
+                selectID: "fileTypes",
+                labelID: "fileTypesLabelID"
+            }
         },
         events: {
             modelChanged: null
@@ -223,15 +260,6 @@ var demo = demo || {};
     });
     
     demo.imageGallery.settings.init = function (that) {
-        // TODO: Replace these with model transformation.
-        that.events.prepareModelForRender.addListener(function (model) {
-            model.fileTypes = fluid.isArrayable(model.fileTypes) ? 
-                model.fileTypes.join(",") : model.fileTypes;
-        });
-        that.applier.modelChanged.addListener("*", function (model) {
-            model.fileTypes = model.fileTypes ? model.fileTypes.split(",") : undefined;
-        });
-        
         // TODO: Replace this with a declarative listener when the framework supports it.
         that.applier.modelChanged.addListener("*", function (model) {
             that.events.modelChanged.fire(model);

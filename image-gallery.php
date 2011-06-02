@@ -51,9 +51,10 @@ include(FLUID_IG_INCLUDE_PATH . "vitals.inc.php");
         <script type="text/javascript" src="js/image-gallery.js"></script>
     </head>
     <body>
-        <div class="ig-imageGallery">
+        <div class="ig-imageGallery igStyle-imageGallery">
+            <h1>Image Gallery Uploader Demo</h1>
             <!-- Basic upload controls, used when JavaScript is unavailable -->
-            <div class="ig-uploaders">
+            <div class="igStyle-uploaders">
                 <form action="uploader.php" method="post" enctype="multipart/form-data" class="fl-progEnhance-basic">
                     <div>
                         <input type="hidden" name="isSingleUploader" value="1" />
@@ -68,44 +69,46 @@ include(FLUID_IG_INCLUDE_PATH . "vitals.inc.php");
                 </div>
             </div>
         
-            <div class="ig-imageViewer">
-                <!-- The container to display all the uploaded images. -->
+            <div>
                 <h2>Uploaded images:</h2>
-                <div class="ig-imageViewer-images"></div>
+                <div class="igStyle-imageViewer">
+                    <!-- The container to display all the uploaded images. -->
+                    <div class="ig-imageViewer-images igStyle-imageViewer-images"></div>
+                </div>
             </div>
-        
-            <div class="ig-serverErrors">
+            
+            <div class="igStyle-serverErrors ig-serverErrors">
+                <span class="igStyle-errorTitle">Something happened</span><br />
+                <span>Test error message</span>
                 <!-- The returned server error message will be displayed in this container. -->
             </div>
         
-            <div class="ig-notes">
-                <p>
-                    Notes:
-                    <ul>
-                        <li>Your session will stay active for an hour. After one hour, all the uploaded images will be erased from the server.</li>
-                        <li>To test with specific file types, set the fileTypes option to a comma-delimited list of MIME types.</li>
-                        <li>Reconfiguring the Uploader in IE 7-8 is known to cause periodic explosions.</li>
-                    </ul>
-            </div>
-        
             <div class="ig-settings fl-hidden">
+                <h2>Demo settings</h2>
+                <label for="fileSizeLimit">File size limit:</label>
+                <select id="fileSizeLimit">
+                </select> MB<br />
+
+                <label for="fileUploadLimit">Upload queue limit:</label>
+                <select id="fileUploadLimit">
+                </select><br />
+
+                <span>Allowed image types:</span>
                 <fieldset>
-                    <legend>Uploader Settings</legend>
-                    <table class="settingsTable noBorder">
-                        <tr>
-                            <td class="noBorder"><label for="fileSizeLimit">File Size Limit:</label></td>
-                            <td class="noBorder"><input id="fileSizeLimit" type="text" /> in KB</td>
-                        </tr>
-                        <tr>
-                            <td class="noBorder"><label for="fileUploadLimit">File Queue Limit:</label></td>
-                            <td class="noBorder"><input id="fileUploadLimit" type="text" /></td>
-                        </tr>
-                        <tr>
-                            <td class="noBorder"><label for="fileTypes">Allowed File MIME Types:</label></td>
-                            <td class="noBorder"><input id="fileTypes" name="allowedFileType" type="text" /></td>
-                        </tr>
-                    </table>
+                    <span class="fileTypes-row">
+                        <input class="fileTypes-choice" id="fileTypes-choice" type="checkbox" />
+                        <label class="fileTypes-label" for="fileTypes-choice">choice</label>
+                    </span>
                 </fieldset>
+            </div>
+            
+            <div>
+                <h2>Demo notes:</h2>
+                <ul>
+                    <li>The session will stay active for one hour. After one hour, any uploaded images will be erased from the server.</li>
+                    <li>Changing demo settings in IE 7 and IE 8 is known to cause periodic errors.</li>
+                    <li>Demo setting "Allowed image types" is only supported by IE, not other browsers.</li>
+                </ul>
             </div>
         </div>
         
