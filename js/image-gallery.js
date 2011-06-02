@@ -88,11 +88,15 @@ var demo = demo || {};
                                     statusCode: "{arguments}.2"
                                 }
                             ]
+                        },
+                        onUploadStart: {
+                            event: "onUploadStart"
                         }
                     },
                     listeners: {
                         onSuccess: "{imagesView}.render",
-                        onError: "{errorsView}.render"
+                        onError: "{errorsView}.render",
+                        onUploadStart: "{errorsView}.clear",
                     }
                 }
             },
@@ -195,6 +199,10 @@ var demo = demo || {};
             var renderedMarkup = fluid.stringTemplate(that.options.template, values);
             that.container.append(renderedMarkup);
         };
+
+        that.clear = function () {
+            that.container.html("");
+        }
     };
     
     
