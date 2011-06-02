@@ -1,12 +1,8 @@
 .igStyle-imageGallery {
-    width: 40%;
+    width: 440px;
     margin-left: auto;
     margin-right: auto;
  }
-
-.igStyle-uploaders {
-    margin-bottom: 2em;
-}
 
 .igStyle-imageViewer {
     border: solid thin;
@@ -33,10 +29,6 @@
     max-height: 75px;
 }
 
-.igStyle-imageFrame {
-/* no styles yet */
-}
-
 .igStyle-fileTypes {
     display:block;
     margin-left:20px;
@@ -47,6 +39,6 @@
     margin-left:1em;
 }
 
-#fileTypes{
+.ig-settings #fileTypes{
     margin-left: 20px;
 }
