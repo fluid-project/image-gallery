@@ -83,21 +83,27 @@ include(FLUID_IG_INCLUDE_PATH . "vitals.inc.php");
         
             <div class="ig-settings fl-hidden">
                 <h2>Demo settings</h2>
-                <label for="fileSizeLimit">File size limit:</label>
-                <select id="fileSizeLimit">
-                </select> MB<br />
-
-                <label for="fileUploadLimit">Upload queue limit:</label>
-                <select id="fileUploadLimit">
-                </select><br />
-
+                <div class="ig-settings-field">
+                    <label for="fileSizeLimit">File size limit:</label>
+                    <select id="fileSizeLimit">
+                    </select> MB
+                </div>
+                
+                <div class="ig-settings-field">
+                    <label for="fileUploadLimit">Upload queue limit:</label>
+                    <select id="fileUploadLimit">
+                    </select>
+                </div>
+                    
+                <div class="ig-settings-field">
                 <span>Allowed image types:</span>
-                <fieldset>
-                    <span class="fileTypes-row">
-                        <input class="fileTypes-choice" id="fileTypes-choice" type="checkbox" />
-                        <label class="fileTypes-label" for="fileTypes-choice">choice</label>
-                    </span>
-                </fieldset>
+                        <fieldset>
+                            <span class="igStyle-fileTypes fileTypes-row">
+                                <input class="fileTypes-choice" id="fileTypes-choice" type="checkbox" />
+                                <label class="fileTypes-label" for="fileTypes-choice">choice</label>
+                            </span>
+                        </fieldset>
+                </div>
             </div>
             
             <div>
