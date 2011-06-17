@@ -10,7 +10,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
 // Declare dependencies
-/*global fluid_1_4:true, jQuery*/
+/*global fluid, jQuery*/
 
 // JSLint options 
 /*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
@@ -96,7 +96,7 @@ var demo = demo || {};
                     listeners: {
                         onSuccess: "{imagesView}.render",
                         onError: "{errorsView}.render",
-                        onUploadStart: "{errorsView}.clear",
+                        onUploadStart: "{errorsView}.clear"
                     }
                 }
             },
@@ -202,7 +202,7 @@ var demo = demo || {};
 
         that.clear = function () {
             that.container.html("");
-        }
+        };
     };
     
     
@@ -217,7 +217,7 @@ var demo = demo || {};
             fileUploadLimit: "#fileUploadLimit",
             "fileTypesRowID:": ".fileTypes-row",
             fileTypesInputID: ".fileTypes-choice",
-            fileTypesLabelID: ".fileTypes-label",
+            fileTypesLabelID: ".fileTypes-label"
         },
         model: {
             labelMap: {

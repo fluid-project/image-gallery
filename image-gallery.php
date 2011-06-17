@@ -41,6 +41,7 @@ include(FLUID_IG_INCLUDE_PATH . "vitals.inc.php");
         <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/FileQueue.js"></script>
         <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/progress/js/Progress.js"></script>
         <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/FileQueueView.js"></script>
+        <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/ErrorsView.js"></script>
         <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/MimeTypeExtensions.js"></script>
         <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/FlashUploaderSupport.js"></script>
         <script type="text/javascript" src="<?php echo FLUID_IG_INFUSION;?>/src/webapp/components/uploader/js/Flash9UploaderSupport.js"></script>
