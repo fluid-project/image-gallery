@@ -56,7 +56,7 @@ include(FLUID_IG_INCLUDE_PATH . "vitals.inc.php");
             <h1>Image Gallery Uploader Demo</h1>
             <!-- Basic upload controls, used when JavaScript is unavailable -->
             <div class="igStyle-uploaders">
-                <form action="uploader.php" method="post" enctype="multipart/form-data" class="fl-progEnhance-basic">
+                <form action="uploader-server.php" method="post" enctype="multipart/form-data" class="fl-progEnhance-basic">
                     <div>
                         <input type="hidden" name="isSingleUploader" value="1" />
                         <p>Use the Browse button to add a file, and the Save button to upload it.</p>

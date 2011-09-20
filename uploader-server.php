@@ -85,7 +85,7 @@ foreach ($_FILES as $name => $file_data) {
 	
 	if (isset($_REQUEST['isSingleUploader']) && $_REQUEST['isSingleUploader']) {
 		// At single file uploader, display the uploaded image right after upload
-		echo '<a href="'.FLUID_IG_BASE_HREF.'uploader.html">Back to image gallery demo</a><br/><br/>';
+		echo '<a href="'.FLUID_IG_BASE_HREF.'image-gallery.php">Back to image gallery demo</a><br/><br/>';
 		echo '<img src="'.htmlentities(FLUID_IG_BASE_HREF.$destination).'" alt="'.$file_name.'" />';
 	} else {
 		// At multi-file uploader, return the url to the uploaded image
