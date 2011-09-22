@@ -1,6 +1,6 @@
 /*
-Copyright 2011 OCAD University
 
+Copyright 2011 OCAD University
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
 Licenses.
@@ -48,7 +48,7 @@ var demo = demo || {};
                 }
             },
             
-            uploader: {
+            imageUploader: {
                 type: "fluid.uploader",
                 createOnEvent: "onReady",
                 container: "{imageGallery}.dom.uploader",
@@ -68,35 +68,6 @@ var demo = demo || {};
                         fileTypes: ["image/bmp", "image/gif", "image/jpeg", "image/png", "image/tiff"],
                         fileSizeLimit: "20480",
                         fileUploadLimit: 0
-                    },
-                    // Boil Uploader's onFileSuccess and onFileError to match our component's semantics.
-                    events: {
-                        onSuccess: {
-                            event: "onFileSuccess",
-                            args: [
-                                {
-                                    fileName: "{arguments}.0.name",
-                                    srcURL: "{arguments}.1"
-                                }
-                            ]
-                        },
-                        onError: {
-                            event: "onFileError",
-                            args: [
-                                {
-                                    fileName: "{arguments}.0.name",
-                                    statusCode: "{arguments}.2"
-                                }
-                            ]
-                        },
-                        onUploadStart: {
-                            event: "onUploadStart"
-                        }
-                    },
-                    listeners: {
-                        onSuccess: "{imagesView}.render",
-                        onError: "{errorsView}.render",
-                        onUploadStart: "{errorsView}.clear"
                     }
                 }
             },
@@ -121,7 +92,7 @@ var demo = demo || {};
                 type: "demo.imageGallery.settings",
                 createOnEvent: "onReady",
                 options: {
-                    model: "{imageGallery}.options.components.uploader.options.queueSettings",
+                    model: "{imageGallery}.options.components.imageUploader.options.queueSettings",
                     listeners: {
                         modelChanged: "{imageGallery}.resetUploader"
                     }
@@ -160,7 +131,7 @@ var demo = demo || {};
         that.destroyUploader = function () {
             that.locate("uploader").empty();
             if (fluid.get(that, "uploader.strategy.engine")) {
-                var su = that.uploader.strategy.engine.swfUpload;
+                var su = that.imageUploader.strategy.engine.swfUpload;
                 su.destroy();
             }
         };
@@ -284,6 +255,56 @@ var demo = demo || {};
     
     fluid.demands("demo.imageGallery.settings", ["demo.imageGallery", "fluid.uploader.singleFileUploader"], {
         funcName: "fluid.emptySubcomponent"
+    });
+    
+    // Boil Uploader's onFileSuccess and onFileError to match our component's semantics.
+    var EventOpts = {
+        events: {
+            onSuccess: {
+                event: "onFileSuccess",
+                args: [
+                    {
+                        fileName: "{arguments}.0.name",
+                        srcURL: "{arguments}.1"
+                    }
+                ]
+            },
+            onError: {
+                event: "onFileError",
+                args: [
+                    {
+                        fileName: "{arguments}.0.name",
+                        statusCode: "{arguments}.2"
+                    }
+                ]
+            },
+            onUploadStart: {
+                event: "onUploadStart"
+            }
+        },
+        listeners: {
+            onSuccess: "{imagesView}.render",
+            onError: "{errorsView}.render",
+            onUploadStart: "{errorsView}.clear"
+        }
+    };
+    
+    // Bind event options only with multiFileUplaoder, not singleFileUploader, since the boiled
+    // events are only available at multiFileUploader.
+
+    // Note that the demands context uses underlying components rather than the direct use of
+    // fluid.uploader.multiFileUploader because "imageUploader" is an instance of "fluid.uploader"
+    // that the matching on multiFileUploader is too late to pick up the desired options.
+    fluid.demands("imageUploader", ["demo.imageGallery", "fluid.uploader.html5"], {
+        options: EventOpts
+    });
+    
+    fluid.demands("imageUploader", ["demo.imageGallery", "fluid.uploader.swfUpload"], {
+        options: EventOpts
+    });
+    
+    fluid.demands("imageUploader", ["demo.imageGallery", "fluid.uploader.singleFile"], {
+        options: "{options}"
     });
     
 })(jQuery, fluid);
