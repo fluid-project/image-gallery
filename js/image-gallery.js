@@ -258,7 +258,7 @@ var demo = demo || {};
     });
     
     // Boil Uploader's onFileSuccess and onFileError to match our component's semantics.
-    var EventOpts = {
+    var eventOpts = {
         events: {
             onSuccess: {
                 event: "onFileSuccess",
@@ -296,11 +296,11 @@ var demo = demo || {};
     // fluid.uploader.multiFileUploader because "imageUploader" is an instance of "fluid.uploader"
     // that the matching on multiFileUploader is too late to pick up the desired options.
     fluid.demands("imageUploader", ["demo.imageGallery", "fluid.uploader.html5"], {
-        options: EventOpts
+        options: eventOpts
     });
     
     fluid.demands("imageUploader", ["demo.imageGallery", "fluid.uploader.swfUpload"], {
-        options: EventOpts
+        options: eventOpts
     });
     
     fluid.demands("imageUploader", ["demo.imageGallery", "fluid.uploader.singleFile"], {
