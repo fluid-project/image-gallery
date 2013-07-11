@@ -18,6 +18,8 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 var demo = demo || {};
 
 (function ($, fluid) {
+    fluid.setLogging(fluid.logLevel.TRACE);
+    fluid.setDemandLogging(true);
 
     /**
      * ImageGallery represents the client-side behaviour for the Uploader Image Gallery demo.
@@ -248,13 +250,16 @@ var demo = demo || {};
         that.container.removeClass(that.options.styles.hidden);
     };
     
-    fluid.demands("demo.imageGallery.settings", ["demo.imageGallery", "fluid.uploader.multiFileUploader"], {
+    /** Note: As originally written, this used to match on "fluid.uploader.multiFileUploader" which is now no longer
+      * visible from the uploader. In the future, we may be able to restore this after, say, FLUID-4982 */
+    fluid.demands("demo.imageGallery.settings", ["demo.imageGallery"], {
         funcName: "demo.imageGallery.settings",
         container: "{imageGallery}.dom.settings"
     });
     
-    fluid.demands("demo.imageGallery.settings", ["demo.imageGallery", "fluid.uploader.singleFileUploader"], {
-        funcName: "fluid.emptySubcomponent"
+    fluid.demands("demo.imageGallery.settings", ["demo.imageGallery", "fluid.uploader.singleFile"], {
+        funcName: "fluid.emptySubcomponent",
+        container: null
     });
     
     // Boil Uploader's onFileSuccess and onFileError to match our component's semantics.
@@ -277,9 +282,6 @@ var demo = demo || {};
                         statusCode: "{arguments}.2"
                     }
                 ]
-            },
-            onUploadStart: {
-                event: "onUploadStart"
             }
         },
         listeners: {

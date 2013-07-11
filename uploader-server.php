@@ -35,7 +35,8 @@ if (isset($_REQUEST['isSingleUploader']) && $_REQUEST['isSingleUploader']) {
 // 2. whether session id is provided;
 // 3. whether the file extension is allowed;
 // 4. whether $temp_dir exists;
-// 5. whether the file has been uploaded.
+// 5. whether PHP reports an error in the upload (perhaps due to upload_max_filesize in PHP.ini)
+// 6. whether the file has already been uploaded.
 
 // 1. Return error if there is no file received
 if (count($_FILES) == 0) {
@@ -71,10 +72,16 @@ foreach ($_FILES as $name => $file_data) {
 		return_error('Cannot create image folder <span style="font: bold">'.$image_folder.'</span>.', $return_err_in_html);
 		exit;
 	}
+	// 5. Return error if the file uploaded with error
+	if ($file_data['error']) {
+	   return_error('PHP Error when uploading file: code '.$file_data['error'].': consult http://php.net/manual/en/features.file-upload.errors.php for details', $return_err_in_html);
+	   exit;
+	}
+	
 	// END OF error checking
 	
 	$destination = $image_folder.$file_name;
-	// 5. Return error if the file has been uploaded
+	// 6. Return error if the file has already been uploaded
 	if (file_exists($destination)) {
 		return_error($file_name.' has already been uploaded.', $return_err_in_html);
 		exit;

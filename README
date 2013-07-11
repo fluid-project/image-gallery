@@ -14,6 +14,9 @@ How to install:
    dos2unix install.sh     -- (Windows only) convert the installation script in DOS/MAC format to UNIX format
    ./install.sh            -- install.sh asks for the path to your local infusion library
 
+5. Edit your php.ini file to increase the default maximum uploaded file size (upload_max_filesize) to a suitable value (the default
+   client-side maximum enforced in the image gallery is 20MB) - http://php.net/upload-max-filesize
+
 6. That's all. The Image Gallery is running at: http://localhost/image-gallery/image-gallery.php
 
 How it looks:
